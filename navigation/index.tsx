@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import colors from "../assets/colors";
 
-import AuthScreen from "../screens/auth";
+import AuthScreen from "../screens/Auth";
 import AppNavigator from "./AppNavigator";
 
 const Stack = createNativeStackNavigator();
@@ -25,7 +25,15 @@ const RootNavigator = () => {
             headerTitleAlign: "center",
           }}
         />
-        <Stack.Screen name="App" component={AppNavigator} />
+        <Stack.Screen
+          name="App"
+          component={AppNavigator}
+          options={{
+            headerShown: false,
+            headerBackVisible: false,
+            headerShadowVisible: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

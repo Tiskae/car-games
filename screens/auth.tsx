@@ -51,6 +51,7 @@ const AuthScreen = ({
               />
             </View>
           )}
+
           <View style={styles.inputBox}>
             <Text style={styles.inputLabel}>Email</Text>
             <TextInput
@@ -60,6 +61,7 @@ const AuthScreen = ({
               returnKeyType="next"
             />
           </View>
+
           <View style={styles.inputBox}>
             <Text style={styles.inputLabel}>Password</Text>
             <TextInput
@@ -69,6 +71,7 @@ const AuthScreen = ({
               returnKeyType="done"
             />
           </View>
+
           <View style={styles.buttonField}>
             <Button
               title={authType === "login" ? "Login" : "Sign up"}
