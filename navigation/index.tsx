@@ -11,14 +11,7 @@ const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Auth"
-        screenOptions={{
-          headerStyle: {
-            backgroundColor: "#fff",
-          },
-        }}
-      >
+      <Stack.Navigator initialRouteName="Auth">
         <Stack.Screen
           name="Auth"
           component={AuthScreen}
@@ -36,11 +29,9 @@ const RootNavigator = () => {
           name="App"
           component={AppNavigator}
           options={{
-            headerShown: true,
-            headerTitleAlign: "center",
+            headerShown: false,
             headerBackVisible: false,
-            headerShadowVisible: true,
-            title: "Car Games",
+            headerShadowVisible: false,
           }}
         />
       </Stack.Navigator>
