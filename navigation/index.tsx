@@ -17,6 +17,8 @@ const RootNavigator = () => {
           headerStyle: {
             backgroundColor: "#fff",
           },
+          headerTintColor: "purple",
+          animation: "slide_from_right",
         }}
       >
         <Stack.Screen
