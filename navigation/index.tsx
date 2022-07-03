@@ -17,7 +17,8 @@ const RootNavigator = () => {
           headerStyle: {
             backgroundColor: "#fff",
           },
-          headerTintColor: "purple",
+          headerTintColor: "#222",
+          headerTitleStyle: { fontWeight: "500" },
           animation: "slide_from_right",
         }}
       >

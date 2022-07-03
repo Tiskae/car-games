@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     width: "100%",
-    backgroundColor: "#fffffff3",
+    backgroundColor: "#ffffff",
   },
 
   heading: {
@@ -132,12 +132,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   inputField: {
-    borderColor: colors.primary,
+    // borderColor: colors.primary,
     fontSize: 15,
-    borderWidth: 2,
+    // borderWidth: 2,
     marginBottom: 20,
     padding: 10,
     paddingHorizontal: 10,
+    backgroundColor: "#fff",
+    borderRightWidth: 2,
+    borderRightColor: colors.primary,
+    elevation: 2,
   },
   buttonField: {
     width: "80%",

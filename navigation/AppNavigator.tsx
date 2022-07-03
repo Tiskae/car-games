@@ -4,6 +4,7 @@ import { Ionicons, Fontisto } from "@expo/vector-icons";
 import LeaderboardScreen from "../screens/Leaderboard";
 import StoreScreen from "../screens/Store";
 import GameNavigator from "./GameNavigator";
+import colors from "../assets/colors";
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
@@ -25,12 +26,12 @@ const AppNavigator = () => {
             <IconPack
               name={iconName}
               size={focused ? 25 : 20}
-              color={focused ? "purple" : "#7e7e7e"}
+              color={focused ? "#000" : "#7e7e7e"}
             />
           );
         },
       })}
-      activeColor="purple"
+      activeColor="#000"
       inactiveColor="#eee"
       shifting={true}
       labeled={true}
