@@ -23,17 +23,18 @@ const GameNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        animation: "slide_from_right",
       }}
     >
       <Stack.Screen
         name="GameCategories"
         component={GameCategories}
-        options={{ transitionSpec: { open: config, close: config } }}
+        // options={{ transitionSpec: { open: config, close: config } }}
       />
       <Stack.Screen
         name="GameDetails"
         component={GameDetails}
-        options={{ transitionSpec: { open: config, close: config } }}
+        // options={{ transitionSpec: { open: config, close: config } }}
       />
     </Stack.Navigator>
   );

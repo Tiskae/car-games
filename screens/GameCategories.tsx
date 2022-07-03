@@ -22,16 +22,17 @@ type Games = Array<{
   IconPack?: any;
   iconName?: string;
   locked?: boolean;
+  progress?: number;
 }>;
 
 // prettier-ignore
 const games: Games = [
-  {id: "1", title: "Price Quiz", backgColor: colors.greenLight, IconPack: MaterialIcons, iconName: "attach-money"},
-  {id: "2", title: "True or false", backgColor: colors.cyanLight}, // default icon used
-  {id: "3", title: "Logo quiz", backgColor: colors.greyLight, IconPack: Fontisto, iconName: "react"},
-  {id: "4", title: "Guess the car", backgColor: colors.yellowLight, IconPack: Ionicons, iconName: "car-sport-outline", locked: true},
-  {id: "5", title: "Power Quiz", backgColor: colors.redLight, IconPack: FontAwesome, iconName: "superpowers", locked: true},
-  {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true},
+  {id: "1", title: "Price Quiz", backgColor: colors.greenLight, IconPack: MaterialIcons, iconName: "attach-money", progress: 70},
+  {id: "2", title: "True or false", backgColor: colors.cyanLight, progress: 10}, // default icon used
+  {id: "3", title: "Logo quiz", backgColor: colors.greyLight, IconPack: Fontisto, iconName: "react", progress: 35},
+  {id: "4", title: "Guess the car", backgColor: colors.yellowLight, IconPack: Ionicons, iconName: "car-sport-outline", locked: true, progress: 0},
+  {id: "5", title: "Power Quiz", backgColor: colors.redLight, IconPack: FontAwesome, iconName: "superpowers", locked: true, progress: 0},
+  {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true, progress: 70},
   
 ];
 
@@ -51,10 +52,12 @@ const GameCategories = (props: Props) => {
             backgroundColor={game.backgColor}
             icon={
               IconPack && (
-                <IconPack name={game.iconName} size={50} color="black" />
+                <IconPack name={game.iconName} size={50} color="#222" />
               )
             }
             clicked={() => navigateToGame(game.id, game.title)}
+            locked={game.locked}
+            progress={game.progress}
           />
         );
       })}

@@ -1,5 +1,6 @@
 export default {
-  primary: "#a5d8ff",
+  primary: "#007AFF",
+  primaryLight: "#a5d8ff",
   // primary: "#fff",
   cyanLight: "#e3fafc",
   tealLight: "#e6fcf5",
