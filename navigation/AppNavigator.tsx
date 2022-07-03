@@ -1,23 +1,22 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
-import GameCategoriesScreen from "../screens/GameCategories";
 import LeaderboardScreen from "../screens/Leaderboard";
 import StoreScreen from "../screens/Store";
-import colors from "../assets/colors";
-
+import GameNavigator from "./GameNavigator";
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
   return (
     <Tab.Navigator
+      safeAreaInsets={{ bottom: 20, right: 20 }}
       screenOptions={({ route }) => ({
         tabBarColor: "#fff",
         tabBarIcon({ focused }) {
           let iconName: string = "";
           let IconPack: Function = Ionicons;
-          if (route.name === "GameCategories") iconName = "apps-outline";
-          else if (route.name === "Leaderboard") iconName = "podium-outline";
+          if (route.name === "Categories") iconName = "apps";
+          else if (route.name === "Leaderboard") iconName = "podium";
           else if (route.name === "Store") {
             IconPack = Fontisto;
             iconName = "shopping-bag-1";
@@ -26,12 +25,12 @@ const AppNavigator = () => {
             <IconPack
               name={iconName}
               size={focused ? 25 : 20}
-              color={focused ? "black" : "#7e7e7e"}
+              color={focused ? "purple" : "#7e7e7e"}
             />
           );
         },
       })}
-      activeColor="black"
+      activeColor="purple"
       inactiveColor="#eee"
       shifting={true}
       labeled={true}
@@ -41,12 +40,13 @@ const AppNavigator = () => {
       //   sceneAnimationEnabled={false}
     >
       <Tab.Screen
-        name="GameCategories"
-        component={GameCategoriesScreen}
+        name="Categories"
+        component={GameNavigator}
         options={{
           title: "Categories",
           //   tabBarColor: "#e6fcf5",
         }}
+        // listeners
       />
       <Tab.Screen
         name="Leaderboard"
@@ -62,6 +62,7 @@ const AppNavigator = () => {
         options={{
           title: "Store",
           //   tabBarColor: "#fff4e6",
+          tabBarBadge: "1",
         }}
       />
     </Tab.Navigator>

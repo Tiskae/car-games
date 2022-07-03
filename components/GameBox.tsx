@@ -1,7 +1,14 @@
 import React from "react";
-import { StyleSheet, Text, View, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  GestureResponderEvent,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+} from "react-native";
 import { AntDesign, Fontisto } from "@expo/vector-icons";
-import Touchable from "./UI/touchable";
+import Touchable from "./UI/Touchable";
 import colors from "../assets/colors";
 
 interface Props {
@@ -9,13 +16,12 @@ interface Props {
   backgroundColor?: string;
   icon?: React.FunctionComponentElement<any>;
   locked?: boolean;
+  clicked: (event: GestureResponderEvent) => void;
 }
 
 const GameBox = (props: Props) => {
-  const Wrapper = props.locked ? View : Touchable;
-
   return (
-    <Wrapper>
+    <Touchable pressed={props.clicked} isDisabled={props.locked || false}>
       <View
         style={{
           ...styles.container,
@@ -37,7 +43,7 @@ const GameBox = (props: Props) => {
           </View>
         )}
       </View>
-    </Wrapper>
+    </Touchable>
   );
 };
 
