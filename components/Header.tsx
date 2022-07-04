@@ -1,17 +1,22 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { Fontisto, SimpleLineIcons } from "@expo/vector-icons";
 import Touchable from "./UI/Touchable";
-import colors from "../assets/colors";
 
 interface Props {
   navigateToSettings: Function;
 }
 
 const Header = (props: Props) => {
+  const [statusBarHeight, setStatusBarHeight] = useState(0);
+
+  useEffect(() => {
+    const deviceStatusBarHeight = StatusBar.currentHeight as number;
+    setStatusBarHeight(deviceStatusBarHeight);
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, paddingTop: statusBarHeight }}>
       <View style={styles.points}>
         <SimpleLineIcons name="trophy" color={"#222"} size={18} />
         <Text style={styles.pointText}>200 points</Text>
@@ -35,9 +40,11 @@ const styles = StyleSheet.create({
     padding: 0,
     paddingHorizontal: 20,
     paddingBottom: 10,
-    paddingTop: 50,
+    // paddingTop: 50,
     alignItems: "center",
     justifyContent: "space-between",
+    borderBottomWidth: 2,
+    borderColor: "#222",
   },
   points: {
     // backgroundColor: colors.primary,
