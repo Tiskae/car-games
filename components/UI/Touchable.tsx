@@ -9,23 +9,20 @@ import {
   Text,
 } from "react-native";
 
+type GestureEvent = (event: GestureResponderEvent) => void;
+
 interface Props {
   children: any;
-  pressed: (event: GestureResponderEvent) => void;
-  isDisabled: boolean;
+  pressed: GestureEvent | Function;
+  isDisabled?: boolean;
 }
 
 export default (props: Props) => {
-  const TouchableComp: Function =
-    Platform.OS === "android" && Platform.Version >= 22
-      ? TouchableNativeFeedback
-      : TouchableOpacity;
-
   if (Platform.OS === "android" && Platform.Version >= 22) {
     return (
       <TouchableNativeFeedback
         disabled={props.isDisabled}
-        onPress={props.pressed}
+        onPress={props.pressed as GestureEvent}
       >
         {props.children}
       </TouchableNativeFeedback>
@@ -36,7 +33,7 @@ export default (props: Props) => {
     <TouchableOpacity
       activeOpacity={0.7}
       disabled={props.isDisabled}
-      onPress={props.pressed}
+      onPress={props.pressed as GestureEvent}
     >
       {props.children}
     </TouchableOpacity>

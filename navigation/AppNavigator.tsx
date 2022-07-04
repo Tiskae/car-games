@@ -4,7 +4,7 @@ import { Ionicons, Fontisto } from "@expo/vector-icons";
 import LeaderboardScreen from "../screens/Leaderboard";
 import StoreScreen from "../screens/Store";
 import GameNavigator from "./GameNavigator";
-import colors from "../assets/colors";
+
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {

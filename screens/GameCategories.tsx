@@ -70,6 +70,8 @@ export default GameCategories;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
+    // marginTop: 20,
+    // paddingTop: 0,
     padding: 20,
     flex: 1,
   },
