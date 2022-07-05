@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import colors from "../assets/colors";
 import GameBox from "../components/GameBox";
 import {
@@ -70,6 +70,8 @@ export default GameCategories;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
+    // marginTop: 20,
+    // paddingTop: 0,
     padding: 20,
     flex: 1,
   },

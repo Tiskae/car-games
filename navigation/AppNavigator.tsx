@@ -4,7 +4,8 @@ import { Ionicons, Fontisto } from "@expo/vector-icons";
 import LeaderboardScreen from "../screens/Leaderboard";
 import StoreScreen from "../screens/Store";
 import GameNavigator from "./GameNavigator";
-import colors from "../assets/colors";
+import { StatusBar } from "expo-status-bar";
+
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
@@ -45,8 +46,10 @@ const AppNavigator = () => {
         component={GameNavigator}
         options={{
           title: "Categories",
+
           //   tabBarColor: "#e6fcf5",
         }}
+
         // listeners
       />
       <Tab.Screen
