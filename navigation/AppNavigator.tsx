@@ -5,6 +5,7 @@ import { Ionicons, Fontisto } from "@expo/vector-icons";
 import LeaderboardScreen from "../screens/Leaderboard/Leaderboard";
 import StoreScreen from "../screens/Store/Store";
 import GameNavigator from "./GameNavigator";
+import GameCategories from "../screens/Games/GameCategories";
 
 import { RootState } from "../store/index";
 
@@ -55,7 +56,7 @@ const AppNavigator = () => {
     >
       <Tab.Screen
         name="Categories"
-        component={GameNavigator}
+        component={GameCategories}
         options={{
           title: "Categories",
 

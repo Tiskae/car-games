@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthScreen from "../screens/Auth";
 import AppNavigator from "./AppNavigator";
+import GameNavigator from "./GameNavigator";
 import SettingsScreen from "../screens/Settings";
 import Header from "../components/Header";
 
@@ -38,7 +39,7 @@ const RootNavigator = () => {
         />
         <Stack.Screen
           name="App"
-          component={AppNavigator}
+          component={GameNavigator}
           options={{
             headerShown: true,
             headerTitleAlign: "center",

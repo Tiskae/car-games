@@ -40,27 +40,27 @@ const games: Games = [
 const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const unsubscribe = props.navigation.addListener("blur", (e: any) => {
-      // e.preventDefault();
-      console.log("blur");
-    });
-    // props.navigation.setOptions({ tabBarLabel: "Yay!"});
+  // useEffect(() => {
+  //   const unsubscribe = props.navigation.addListener("blur", (e: any) => {
+  //     // e.preventDefault();
+  //     console.log("blur");
+  //   });
+  //   // props.navigation.setOptions({ tabBarLabel: "Yay!"});
 
-    // dispatch(toggleTabBar(false));
+  //   // dispatch(toggleTabBar(false));
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
-  useEffect(() => {
-    const unsubscribe = props.navigation.addListener("focus", (e: any) => {
-      console.log("Focus");
-      props.navigation.setOptions({ tabBarBadge: "2" });
-      props.navigation.setOptions({ tabBarColor: "#0f0" });
-    });
+  // useEffect(() => {
+  //   const unsubscribe = props.navigation.addListener("focus", (e: any) => {
+  //     console.log("Focus");
+  //     props.navigation.setOptions({ tabBarBadge: "2" });
+  //     props.navigation.setOptions({ tabBarColor: "#0f0" });
+  //   });
 
-    return unsubscribe;
-  }, []);
+  //   return unsubscribe;
+  // }, []);
 
   const navigateToGame = (id: string, title: string) => {
     props.navigation.navigate("GameDetails", { id, title });
@@ -77,7 +77,7 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
         Increase Price Quiz Progress
       </Button> */}
 
-      {games1.games.map((game) => {
+      {games1.games.map((game, idx, arr) => {
         const IconPack = game.IconPack;
         return (
           <GameBox
@@ -92,6 +92,7 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
             clicked={() => navigateToGame(game.id, game.title)}
             locked={game.locked}
             progress={game.progress}
+            isLast={idx === arr.length - 1}
           />
         );
       })}
@@ -107,9 +108,10 @@ export default GameCategories;
 
 const styles = StyleSheet.create({
   container: {
+    // backgroundColor: "cyan",
     flexDirection: "column",
     // marginTop: 20,
-    // paddingTop: 0,
+    // paddingBottom: 140,
     padding: 20,
     flex: 1,
   },
