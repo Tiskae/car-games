@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  GestureResponderEvent,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-} from "react-native";
+import { StyleSheet, Text, View, GestureResponderEvent } from "react-native";
 import { Progress } from "native-base";
 import { AntDesign, Fontisto } from "@expo/vector-icons";
 import Touchable from "./UI/Touchable";
@@ -51,6 +44,7 @@ const GameBox = (props: Props) => {
               colorScheme={"gray"}
               value={props.progress}
               size="sm"
+              borderRadius={7}
             />
           </View>
         )}
@@ -91,6 +85,9 @@ const styles = StyleSheet.create({
   progress: {
     marginTop: 15,
     width: "100%",
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: "#ddd",
   },
   locked: {
     position: "absolute",

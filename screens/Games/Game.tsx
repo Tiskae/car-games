@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { getGame } from "../../helpers";
 
 interface Props {
   navigation: {};
@@ -13,9 +14,11 @@ interface Props {
 
 const GameDetails = (props: Props) => {
   const { id, title } = props.route.params;
+  const { game: Game, overview: GameOverview } = getGame(id);
   return (
     <View style={styles.container}>
-      <Text>{title}</Text>
+      {/* <Text>{title}</Text> */}
+      <GameOverview />
     </View>
   );
 };

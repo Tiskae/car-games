@@ -1,10 +1,9 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
-import LeaderboardScreen from "../screens/Leaderboard";
-import StoreScreen from "../screens/Store";
+import LeaderboardScreen from "../screens/Leaderboard/Leaderboard";
+import StoreScreen from "../screens/Store/Store";
 import GameNavigator from "./GameNavigator";
-import { StatusBar } from "expo-status-bar";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -37,7 +36,7 @@ const AppNavigator = () => {
       shifting={true}
       labeled={true}
       keyboardHidesNavigationBar={true}
-
+      barStyle={{ borderTopColor: "#bbb", borderTopWidth: 2 }}
       //   barStyle={{ height: 80 }}
       //   sceneAnimationEnabled={false}
     >

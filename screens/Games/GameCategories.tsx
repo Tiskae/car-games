@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../store";
 import { StyleSheet, ScrollView } from "react-native";
-import colors from "../assets/colors";
-import GameBox from "../components/GameBox";
+import colors from "../../assets/colors";
+import GameBox from "../../components/GameBox";
 import {
   MaterialIcons,
   Ionicons,
   FontAwesome,
   Fontisto,
 } from "@expo/vector-icons";
+import { Button } from "native-base";
+import { increaseProgress } from "../../store/slices/games";
 
 interface Props {
   navigation: {
@@ -33,7 +37,6 @@ const games: Games = [
   {id: "4", title: "Guess the car", backgColor: colors.yellowLight, IconPack: Ionicons, iconName: "car-sport-outline", locked: true, progress: 0},
   {id: "5", title: "Power Quiz", backgColor: colors.redLight, IconPack: FontAwesome, iconName: "superpowers", locked: true, progress: 0},
   {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true, progress: 70},
-  
 ];
 
 const GameCategories = (props: Props) => {
@@ -41,9 +44,19 @@ const GameCategories = (props: Props) => {
     props.navigation.navigate("GameDetails", { id, title });
   };
 
+  const games1 = useSelector((state: RootState) => state.games);
+  const dispatch = useDispatch();
+  const increaseProgessHandler = () => {
+    dispatch(increaseProgress({ id: "1", value: 4 }));
+  };
+
   return (
     <ScrollView style={styles.container} scrollEnabled={true}>
-      {games.map((game) => {
+      {/* <Button onPress={increaseProgessHandler}>
+        Increase Price Quiz Progress
+      </Button> */}
+
+      {games1.games.map((game) => {
         const IconPack = game.IconPack;
         return (
           <GameBox
