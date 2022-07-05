@@ -19,6 +19,7 @@ interface Games {
     progress?: number;
   }>;
   totalPoints: number;
+  showTabBar: boolean;
 }
 
 // prettier-ignore
@@ -29,7 +30,7 @@ const initialState: Games = {games: [
     {id: "4", title: "Guess the car", backgColor: colors.yellowLight, IconPack: Ionicons, iconName: "car-sport-outline", locked: true, progress: 0},
     {id: "5", title: "Power Quiz", backgColor: colors.redLight, IconPack: FontAwesome, iconName: "superpowers", locked: true, progress: 0},
     {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true, progress: 70},
-  ], totalPoints: 40};
+  ], totalPoints: 40, showTabBar: true};
 
 const gameSlice = createSlice({
   name: "game",
@@ -45,9 +46,12 @@ const gameSlice = createSlice({
       state.games[idx].progress! += action.payload.value;
       state.totalPoints += 5;
     },
+    toggleTabBar: (state: Games, action: PayloadAction<boolean>) => {
+      state.showTabBar = action.payload;
+    },
   },
 });
 
-export const { increaseProgress } = gameSlice.actions;
+export const { increaseProgress, toggleTabBar } = gameSlice.actions;
 
 export default gameSlice.reducer;

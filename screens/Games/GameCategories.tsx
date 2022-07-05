@@ -1,4 +1,8 @@
 import React, { useEffect } from "react";
+import {
+  MaterialBottomTabScreenProps,
+  MaterialBottomTabNavigationOptions,
+} from "@react-navigation/material-bottom-tabs";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { StyleSheet, ScrollView } from "react-native";
@@ -11,13 +15,7 @@ import {
   Fontisto,
 } from "@expo/vector-icons";
 import { Button } from "native-base";
-import { increaseProgress } from "../../store/slices/games";
-
-interface Props {
-  navigation: {
-    navigate: Function;
-  };
-}
+import { increaseProgress, toggleTabBar } from "../../store/slices/games";
 
 type Games = Array<{
   id: string;
@@ -39,13 +37,36 @@ const games: Games = [
   {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true, progress: 70},
 ];
 
-const GameCategories = (props: Props) => {
+const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener("blur", (e: any) => {
+      // e.preventDefault();
+      console.log("blur");
+    });
+    // props.navigation.setOptions({ tabBarLabel: "Yay!"});
+
+    // dispatch(toggleTabBar(false));
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener("focus", (e: any) => {
+      console.log("Focus");
+      props.navigation.setOptions({ tabBarBadge: "2" });
+      props.navigation.setOptions({ tabBarColor: "#0f0" });
+    });
+
+    return unsubscribe;
+  }, []);
+
   const navigateToGame = (id: string, title: string) => {
     props.navigation.navigate("GameDetails", { id, title });
   };
 
   const games1 = useSelector((state: RootState) => state.games);
-  const dispatch = useDispatch();
   const increaseProgessHandler = () => {
     dispatch(increaseProgress({ id: "1", value: 4 }));
   };
@@ -77,6 +98,10 @@ const GameCategories = (props: Props) => {
     </ScrollView>
   );
 };
+
+// GameCategories.screenOptions = {
+
+// } ;
 
 export default GameCategories;
 

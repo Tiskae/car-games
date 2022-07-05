@@ -1,3 +1,5 @@
+import { ComponentType } from "react";
+
 import GuessTheCar from "../screens/Games/GuessTheCar/GameScreen";
 import GuessTheCarOverview from "../screens/Games/GuessTheCar/Overview";
 
@@ -24,8 +26,8 @@ import TrueOrFalseOverview from "../screens/Games/TrueOrFalse/Overview";
 // id: "6", title: "Speed Quiz"
 
 type Game = {
-  game: Function;
-  overview: Function;
+  game: ComponentType<any>;
+  overview: ComponentType<any>;
 };
 
 export const getGame = (id: string): Game => {
