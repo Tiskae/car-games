@@ -1,14 +1,19 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
-import LeaderboardScreen from "../screens/Leaderboard";
-import StoreScreen from "../screens/Store";
+import LeaderboardScreen from "../screens/Leaderboard/Leaderboard";
+import StoreScreen from "../screens/Store/Store";
 import GameNavigator from "./GameNavigator";
-import { StatusBar } from "expo-status-bar";
+import GameCategories from "../screens/Games/GameCategories";
+
+import { RootState } from "../store/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
+  const showTabBar = useSelector((state: RootState) => state.games.showTabBar);
+
   return (
     <Tab.Navigator
       safeAreaInsets={{ bottom: 20, right: 20 }}
@@ -38,12 +43,20 @@ const AppNavigator = () => {
       labeled={true}
       keyboardHidesNavigationBar={true}
 
+      // barStyle = {()=> {
+
+      // }}
+      // barStyle={{
+      //   borderTopColor: "#bbb",
+      //   borderTopWidth: 2,
+      //   // display: showTabBar ? "flex" : "none",
+      // }}
       //   barStyle={{ height: 80 }}
       //   sceneAnimationEnabled={false}
     >
       <Tab.Screen
         name="Categories"
-        component={GameNavigator}
+        component={GameCategories}
         options={{
           title: "Categories",
 

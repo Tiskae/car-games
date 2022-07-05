@@ -1,8 +1,9 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import GameCategories from "../screens/GameCategories";
-import GameDetails from "../screens/Game";
+import GameCategories from "../screens/Games/GameCategories";
+import GameDetails from "../screens/Games/Game";
+import AppNavigator from "./AppNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,11 +27,12 @@ const GameNavigator = () => {
         animation: "slide_from_right",
       }}
     >
-      <Stack.Screen
+      <Stack.Screen name="AppNavigator" component={AppNavigator} />
+      {/* <Stack.Screen
         name="GameCategories"
         component={GameCategories}
         // options={{ transitionSpec: { open: config, close: config } }}
-      />
+      /> */}
       <Stack.Screen
         name="GameDetails"
         component={GameDetails}

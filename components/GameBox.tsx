@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  GestureResponderEvent,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-} from "react-native";
+import { StyleSheet, Text, View, GestureResponderEvent } from "react-native";
 import { Progress } from "native-base";
 import { AntDesign, Fontisto } from "@expo/vector-icons";
 import Touchable from "./UI/Touchable";
@@ -19,6 +12,7 @@ interface Props {
   locked?: boolean;
   clicked: (event: GestureResponderEvent) => void;
   progress?: number;
+  isLast?: boolean;
 }
 
 const GameBox = (props: Props) => {
@@ -29,6 +23,7 @@ const GameBox = (props: Props) => {
           ...styles.container,
           backgroundColor: props.backgroundColor || colors.redLight,
           opacity: props.locked ? 0.2 : 1,
+          marginBottom: props.isLast ? 30 : 10,
         }}
       >
         <View style={styles.details}>
@@ -51,6 +46,7 @@ const GameBox = (props: Props) => {
               colorScheme={"gray"}
               value={props.progress}
               size="sm"
+              borderRadius={7}
             />
           </View>
         )}
@@ -79,7 +75,7 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 1, width: 1 },
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 10,
+    // marginBottom: 10, // Set conditionally in the component
     borderColor: "#666",
     borderWidth: 2,
   },
@@ -91,6 +87,9 @@ const styles = StyleSheet.create({
   progress: {
     marginTop: 15,
     width: "100%",
+    borderWidth: 1,
+    borderRadius: 7,
+    borderColor: "#ddd",
   },
   locked: {
     position: "absolute",
