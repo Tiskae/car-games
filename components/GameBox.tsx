@@ -1,9 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View, GestureResponderEvent } from "react-native";
+import { StyleSheet, View, GestureResponderEvent } from "react-native";
 import { Progress } from "native-base";
 import { AntDesign, Fontisto } from "@expo/vector-icons";
 import Touchable from "./UI/Touchable";
 import colors from "../assets/colors";
+import Text from "../components/UI/Text";
 
 interface Props {
   title: string;
@@ -28,7 +29,7 @@ const GameBox = (props: Props) => {
       >
         <View style={styles.details}>
           <View style={{ alignSelf: "flex-start" }}>
-            <Text style={{ fontSize: 18, textTransform: "uppercase" }}>
+            <Text size="md" upper>
               {props.title}
             </Text>
           </View>
