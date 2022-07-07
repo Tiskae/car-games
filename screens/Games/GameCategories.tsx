@@ -1,41 +1,10 @@
-import React, { useEffect } from "react";
-import {
-  MaterialBottomTabScreenProps,
-  MaterialBottomTabNavigationOptions,
-} from "@react-navigation/material-bottom-tabs";
+import React from "react";
+import { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { StyleSheet, ScrollView } from "react-native";
-import colors from "../../assets/colors";
 import GameBox from "../../components/GameBox";
-import {
-  MaterialIcons,
-  Ionicons,
-  FontAwesome,
-  Fontisto,
-} from "@expo/vector-icons";
-import { Button } from "native-base";
-import { increaseProgress, toggleTabBar } from "../../store/slices/games";
-
-type Games = Array<{
-  id: string;
-  title: string;
-  backgColor: string;
-  IconPack?: any;
-  iconName?: string;
-  locked?: boolean;
-  progress?: number;
-}>;
-
-// prettier-ignore
-const games: Games = [
-  {id: "1", title: "Price Quiz", backgColor: colors.greenLight, IconPack: MaterialIcons, iconName: "attach-money", progress: 70},
-  {id: "2", title: "True or false", backgColor: colors.cyanLight, progress: 10}, // default icon used
-  {id: "3", title: "Logo quiz", backgColor: colors.greyLight, IconPack: Fontisto, iconName: "react", progress: 35},
-  {id: "4", title: "Guess the car", backgColor: colors.yellowLight, IconPack: Ionicons, iconName: "car-sport-outline", locked: true, progress: 0},
-  {id: "5", title: "Power Quiz", backgColor: colors.redLight, IconPack: FontAwesome, iconName: "superpowers", locked: true, progress: 0},
-  {id: "6", title: "Speed Quiz", backgColor: colors.violetLight, IconPack: MaterialIcons, iconName: "speed", locked: true, progress: 70},
-];
+import { increaseProgress } from "../../store/slices/games";
 
 const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
   const dispatch = useDispatch();
