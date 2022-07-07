@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
@@ -8,34 +8,31 @@ import { increaseProgress } from "../../store/slices/games";
 
 const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
   const dispatch = useDispatch();
+  const [focus, setFocus] = useState(false);
 
-  // useEffect(() => {
-  //   const unsubscribe = props.navigation.addListener("blur", (e: any) => {
-  //     // e.preventDefault();
-  //     console.log("blur");
-  //   });
-  //   // props.navigation.setOptions({ tabBarLabel: "Yay!"});
+  useEffect(() => setFocus(true), []);
 
-  //   // dispatch(toggleTabBar(false));
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener("blur", (e: any) => {
+      // console.log(e);
+      setFocus(false);
+    });
+    return unsubscribe;
+  }, []);
 
-  //   return unsubscribe;
-  // }, []);
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener("focus", (e: any) => {
+      setFocus(true);
+    });
 
-  // useEffect(() => {
-  //   const unsubscribe = props.navigation.addListener("focus", (e: any) => {
-  //     console.log("Focus");
-  //     props.navigation.setOptions({ tabBarBadge: "2" });
-  //     props.navigation.setOptions({ tabBarColor: "#0f0" });
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
+    return unsubscribe;
+  }, []);
 
   const navigateToGame = (id: string, title: string) => {
     props.navigation.navigate("GameDetails", { id, title });
   };
 
-  const games1 = useSelector((state: RootState) => state.games);
+  const allGames = useSelector((state: RootState) => state.games);
   const increaseProgessHandler = () => {
     dispatch(increaseProgress({ id: "1", value: 4 }));
   };
@@ -46,11 +43,12 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
         Increase Price Quiz Progress
       </Button> */}
 
-      {games1.games.map((game, idx, arr) => {
+      {allGames.games.map((game, idx, arr) => {
         const IconPack = game.IconPack;
         return (
           <GameBox
             key={game.id}
+            id={idx}
             title={game.title}
             backgroundColor={game.backgColor}
             icon={
@@ -61,7 +59,9 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
             clicked={() => navigateToGame(game.id, game.title)}
             locked={game.locked}
             progress={game.progress}
+            highScore={game.highScore}
             isLast={idx === arr.length - 1}
+            focus={focus}
           />
         );
       })}

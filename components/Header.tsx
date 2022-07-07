@@ -29,8 +29,16 @@ const Header = (props: Props) => {
         <Text style={styles.pointText}>{totalPoints} points</Text>
       </View>
       <Touchable pressed={props.navigateToSettings}>
-        <View>
-          <Fontisto name="player-settings" color={"#222"} size={25} />
+        <View
+          style={{
+            height: 40,
+            width: 40,
+            // backgroundColor: "green",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Fontisto name="player-settings" color={"#222"} size={30} />
         </View>
       </Touchable>
     </View>
