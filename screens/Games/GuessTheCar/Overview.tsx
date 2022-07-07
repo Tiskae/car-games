@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
+import GameLayout from "../../../layouts/Game";
 
 interface Props {
   navigation: {
@@ -9,20 +10,20 @@ interface Props {
 
 const GameScreen = (props: Props) => {
   return (
-    <View style={styles.container}>
-      <Text>Guess the car (Overview)</Text>
+    <GameLayout
+      title="Guess the car"
+      subtitle="Guess the car displayed. Game ends when
+                you lose your streak."
+      highScoreVal="12"
+    >
       <Button
         onPress={() => props.navigation.navigate("GameScreen")}
-        title="Guess the car"
+        title="Start"
       />
-    </View>
+    </GameLayout>
   );
 };
 
 export default GameScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-  },
-});
+const styles = StyleSheet.create({});

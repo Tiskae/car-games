@@ -15,7 +15,7 @@ interface Props {
 }
 
 const GameScreen = (props: Props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <View style={styles.container}>
       <View style={styles.headings}>
