@@ -1,6 +1,6 @@
+import { PresenceTransition } from "native-base";
 import React from "react";
 import { StyleSheet, View, Button } from "react-native";
-import HighScore from "../../../components/HighScore";
 
 import Text from "../../../components/UI/Text";
 import Touchable from "../../../components/UI/Touchable";
@@ -16,7 +16,6 @@ const levels = new Array(20).fill(1).map((el, idx) => idx + 1);
 const GameScreen = (props: Props) => {
   return (
     <View style={styles.container}>
-      <HighScore value="20" align="left" />
       <View style={styles.headings}>
         <Text size="lg" bold upper style={{ letterSpacing: 1 }}>
           Logo Quiz
@@ -26,17 +25,35 @@ const GameScreen = (props: Props) => {
         </Text>
       </View>
       <View style={styles.levels}>
-        {levels.map((l) => (
-          <Touchable
+        {levels.map((l, idx) => (
+          <PresenceTransition
             key={l}
-            pressed={() => {
-              props.navigation.navigate("GameScreen", { level: l });
+            visible={true}
+            initial={{ translateY: 300, opacity: 0, scale: 1 }}
+            animate={{
+              translateY: 0,
+              opacity: 1,
+              scale: 1,
+              transition: {
+                duration: 0.1,
+                delay: idx * 20,
+                type: "spring",
+                velocity: 20,
+                friction: 20,
+                overshootClamping: false,
+              },
             }}
           >
-            <View style={styles.levelBox}>
-              <Text size="md">{l}</Text>
-            </View>
-          </Touchable>
+            <Touchable
+              pressed={() => {
+                props.navigation.navigate("GameScreen", { level: l });
+              }}
+            >
+              <View style={styles.levelBox}>
+                <Text size="md">{l}</Text>
+              </View>
+            </Touchable>
+          </PresenceTransition>
         ))}
       </View>
       {/* <Button

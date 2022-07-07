@@ -14,7 +14,7 @@ interface Props {
 
 // prettier-ignore
 const TextComp = ({ children, size, upper, color, bold, style , italic, center}: Props) => {
-  let fontSize = 10;
+  let fontSize = 13;
   if (size === "md") fontSize = 18;
   else if (size === "lg") fontSize = 28;
   return (
