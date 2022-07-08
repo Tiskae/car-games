@@ -9,6 +9,7 @@ interface Props {
 }
 
 const GameScreen = (props: Props) => {
+  console.log(props);
   return (
     <GameLayout
       title="Price quiz"
