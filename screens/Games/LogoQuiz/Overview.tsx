@@ -1,6 +1,6 @@
 import { PresenceTransition } from "native-base";
 import React from "react";
-import { StyleSheet, View, Button } from "react-native";
+import { StyleSheet, View, ScrollView, Button } from "react-native";
 
 import Text from "../../../components/UI/Text";
 import Touchable from "../../../components/UI/Touchable";
@@ -11,7 +11,7 @@ interface Props {
   };
 }
 
-const levels = new Array(20).fill(1).map((el, idx) => idx + 1);
+const levels = new Array(30).fill(1).map((el, idx) => idx + 1);
 
 const GameScreen = (props: Props) => {
   return (
@@ -24,7 +24,7 @@ const GameScreen = (props: Props) => {
           Fill in the name of the car brand that owns the logo displayed
         </Text>
       </View>
-      <View style={styles.levels}>
+      <ScrollView contentContainerStyle={styles.levels}>
         {levels.map((l, idx) => (
           <PresenceTransition
             key={l}
@@ -55,7 +55,7 @@ const GameScreen = (props: Props) => {
             </Touchable>
           </PresenceTransition>
         ))}
-      </View>
+      </ScrollView>
       {/* <Button
         onPress={() => props.navigation.navigate("GameScreen")}
         title="Price Quiz"
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
+    paddingVertical: 20,
   },
   levelBox: {
     backgroundColor: "#a3a3a3",
