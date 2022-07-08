@@ -1,6 +1,7 @@
 import { PresenceTransition } from "native-base";
 import React from "react";
 import { StyleSheet, View, ScrollView, Button } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 import Text from "../../../components/UI/Text";
 import Touchable from "../../../components/UI/Touchable";
@@ -50,7 +51,8 @@ const GameScreen = (props: Props) => {
               }}
             >
               <View style={styles.levelBox}>
-                <Text size="md">{l}</Text>
+                {/* <Text size="md">{l}</Text> */}
+                <Ionicons name="car-sport-sharp" size={28} color="#222" />
               </View>
             </Touchable>
           </PresenceTransition>
@@ -86,13 +88,15 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   levelBox: {
-    backgroundColor: "#a3a3a3",
+    // backgroundColor: "#fff",
+    borderWidth: 2,
+    borderColor: "#222",
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
     borderRadius: 10,
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     margin: 5,
   },
 });

@@ -77,7 +77,7 @@ export default GameCategories;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: "cyan",
+    // backgroundColor: "white",
     flexDirection: "column",
     // marginTop: 20,
     // paddingBottom: 140,
