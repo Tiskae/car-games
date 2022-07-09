@@ -9,11 +9,11 @@ interface Props {
 }
 
 const GameScreen = (props: Props) => {
-  console.log(props);
+  // console.log(props);
   return (
     <GameLayout
       title="Price quiz"
-      subtitle="Choose whether the price of the car is higer or lower. Game ends when
+      subtitle="Choose whether the car below has a higher or lower price than the car above. Game ends when
                 you lose your streak."
       highScoreVal="20"
     >

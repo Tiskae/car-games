@@ -9,6 +9,7 @@ interface Car {
   /** Manufacturer country */
   nationality: string;
   imageUrl: string;
+  imageAuthor?: string;
 }
 
 const Cars: Car[] = [
@@ -20,6 +21,17 @@ const Cars: Car[] = [
     topSpeed: 310,
     nationality: "American",
     imageUrl: "camaro.jpeg",
+    imageAuthor: "",
+  },
+  {
+    id: 2,
+    name: "Ford Mustang",
+    price: 48000,
+    horsePower: 417,
+    topSpeed: 302,
+    nationality: "American",
+    imageUrl: "mustang.jpeg",
+    imageAuthor: "",
   },
 ];
 
