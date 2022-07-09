@@ -9,6 +9,7 @@ interface Car {
   /** Manufacturer country */
   nationality: string;
   imageUrl: string;
+  imageAuthor?: string;
 }
 
 const Cars: Car[] = [
@@ -20,6 +21,7 @@ const Cars: Car[] = [
     topSpeed: 310,
     nationality: "American",
     imageUrl: "camaro.jpeg",
+    imageAuthor: "",
   },
 ];
 
