@@ -38,7 +38,7 @@ const Header = (props: Props) => {
             justifyContent: "center",
           }}
         >
-          <Fontisto name="player-settings" color={"#222"} size={30} />
+          <Fontisto name="player-settings" color={"#222"} size={27} />
         </View>
       </Touchable>
     </View>
