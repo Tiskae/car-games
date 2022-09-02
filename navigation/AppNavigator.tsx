@@ -28,6 +28,10 @@ const AppNavigator = () => {
             IconPack = Fontisto;
             iconName = "shopping-bag-1";
           }
+          else if (route.name === "Settings") {
+            IconPack = Fontisto;
+            iconName = "player-settings"
+          }
           return (
             <IconPack
               name={iconName}
@@ -70,7 +74,7 @@ const AppNavigator = () => {
         component={LeaderboardScreen}
         options={{
           title: "Leaderboard",
-          //   tabBarColor: "#e3fafc",
+            tabBarColor: "#e3fafc",
         }}
       />
       <Tab.Screen
@@ -78,10 +82,19 @@ const AppNavigator = () => {
         component={StoreScreen}
         options={{
           title: "Store",
-          //   tabBarColor: "#fff4e6",
+            tabBarColor: "#fff4e6",
           tabBarBadge: "1",
         }}
       />
+      {/* REVIEW  */}
+      {/* <Tab.Screen
+        name="Settings"
+        component={StoreScreen}
+        options={{
+          title: "Settings",
+            tabBarColor: "#e6fcf5",
+        }}
+      /> */}
     </Tab.Navigator>
   );
 };

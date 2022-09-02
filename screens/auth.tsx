@@ -29,7 +29,7 @@ const AuthScreen = ({
   };
 
   return (
-    <ImageBackground source={require("..//camaro.jpeg")} style={{ flex: 1 }}>
+    <ImageBackground source={require("../assets/camaro.jpeg")} style={{ flex: 1 }}>
       <View style={styles.container}>
         <View style={styles.heading}>
           <Text style={styles.headingText}>

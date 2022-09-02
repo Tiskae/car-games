@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import AuthScreen from "../screens/Auth";
-import AppNavigator from "./AppNavigator";
+// import AppNavigator from "./AppNavigator";
 import GameNavigator from "./GameNavigator";
 import SettingsScreen from "../screens/Settings";
 import Header from "../components/Header";
