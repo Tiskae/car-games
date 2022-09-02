@@ -23,7 +23,7 @@ const GameLayout = (props: Props) => {
     <View style={{ ...styles.container, ...props.style }}>
       <HighScore value="20" align="left" />
       <View style={styles.headings}>
-        <Text size="lg" bold upper style={{ letterSpacing: 1 }}>
+        <Text size="x-lg" bold upper style={{ letterSpacing: 1, marginBottom: 10 , }}>
           {props.title}
         </Text>
         <Text size="md" color="#555" center>
@@ -40,9 +40,12 @@ export default GameLayout;
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    paddingBottom: 80,
     flex: 1,
     alignItems: "center",
+    justifyContent: "space-between",
     height: "100%",
+    backgroundColor: "#ffffffee"
   },
   headings: {
     alignItems: "center",
