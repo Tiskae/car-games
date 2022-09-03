@@ -1,5 +1,5 @@
 import { PresenceTransition, AlertDialog, Button} from "native-base";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -19,15 +19,17 @@ const CarCard = ({
   revealPrice,
   carPosition,
   imageSrc,
+  pressed
 }: {
   carName: string;
   price: number;
   revealPrice: boolean;
   carPosition: number;
-  imageSrc: ImageSourcePropType;
+  imageSrc: string;
+  pressed: Function;
 }) => {
   return (
-    <Touchable pressed={() => {}}>
+    <Touchable pressed={pressed}>
       <PresenceTransition
         visible={true}
         initial={{ translateY: 300, opacity: 0, scale: 1 }}
@@ -47,7 +49,7 @@ const CarCard = ({
       >
         <View style={styles.card}>
           <Image
-            source={imageSrc}
+            source={{uri: imageSrc}}
             height={100}
             width={100}
             resizeMode="cover"
@@ -85,17 +87,41 @@ interface Props {
 }
 
 const GameScreen = (props: Props) => {
-  const car1 = Cars[0];
-  const car2 = Cars[1];
-
+  const [firstLoad, setFirstLoad] = useState<boolean>(true);
   const [showHintModal, setShowHintModal] = useState<boolean>(false);
+  const [gameScore, setGameScore] = useState<number>(0);
+  const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [showHint, setShowHint] = useState<boolean>(false);
+  const [userAnswer, setUserAnswer] = useState<null | 1 | 2>(null);
+  
+  const car1 = Cars[currentQuestion - 1];
+  const car2 = Cars[currentQuestion];
+
+  const nextQuestion = ()=> {
+    setShowHint(false);
+    // setUserAnswer(null);
+    setCurrentQuestion(old => {
+      return Cars.length >= old + 2 ? old + 2: 1})
+  }
+
+  useEffect(()=> {
+    if (firstLoad) {
+      setFirstLoad(false);
+      return;
+    };
+    // if (typeof(userAnswer) === "number") return;
+
+    let isCorrect = userAnswer === 1;
+    if (isCorrect) setGameScore(old => old + 1);
+    nextQuestion();
+  }, [userAnswer])
+  
 
   return (
     <View style={styles.container}>
       <View style={styles.headings}>
         <Text size="md" style={{ color: "#555" }}>
-          Score: {0}
+          Score: {gameScore}
         </Text>
         <Text size="md" style={{ color: "#555" }}>
           High score: {"8"}
@@ -111,9 +137,10 @@ const GameScreen = (props: Props) => {
       <CarCard
         carName={car1.name}
         carPosition={1}
-        imageSrc={require("../../../assets/camaro.jpeg")}
+        imageSrc={car1.imageUrl}
         price={car1.price}
         revealPrice={showHint}
+        pressed={()=> setUserAnswer(1)}
       />
 
       <View style={{ marginVertical: 10, alignItems: "center" }}>
@@ -125,9 +152,10 @@ const GameScreen = (props: Props) => {
       <CarCard
         carName={car2.name}
         carPosition={2}
-        imageSrc={require("../../../assets/mustang.jpeg")}
+        imageSrc={car2.imageUrl}
         price={car2.price}
         revealPrice={false}
+        pressed={()=> setUserAnswer(2)}
       />
 
       <View style={styles.hint}>
