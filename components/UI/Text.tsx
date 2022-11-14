@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TextStyle } from "react-native";
 
-interface Props {
+interface TextProps {
   children: any;
   size?: "tiny" | "sm" | "md" | "lg" | "x-lg";
   upper?: boolean;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 // prettier-ignore
-const TextComp = ({ children, size, upper, color, bold, style , italic, center}: Props) => {
+const TextComp = ({ children, size, upper, color, bold, style , italic, center}: TextProps) => {
   let fontSize = 13;
 
   if (size === "tiny") fontSize = 14;

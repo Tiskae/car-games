@@ -6,11 +6,11 @@ import Touchable from "./UI/Touchable";
 
 import { RootState } from "../store/index";
 
-interface Props {
+type HeaderProps = {
   navigateToSettings: Function;
 }
 
-const Header = (props: Props) => {
+const Header = (props: HeaderProps) => {
   const [statusBarHeight, setStatusBarHeight] = useState(0);
 
   const totalPoints = useSelector(

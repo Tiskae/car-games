@@ -1,11 +1,6 @@
-import { PresenceTransition, AlertDialog, Button} from "native-base";
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
+import { PresenceTransition, Button, useToast } from "native-base";
+import React, { useState, useEffect, useRef } from "react";
+import { StyleSheet, View, Image } from "react-native";
 import Touchable from "../../../components/UI/Touchable";
 
 import Text from "../../../components/UI/Text";
@@ -19,7 +14,10 @@ const CarCard = ({
   revealPrice,
   carPosition,
   imageSrc,
-  pressed
+  pressed,
+  isCorrect,
+  completed,
+  completedWrong,
 }: {
   carName: string;
   price: number;
@@ -27,9 +25,12 @@ const CarCard = ({
   carPosition: number;
   imageSrc: string;
   pressed: Function;
+  isCorrect: boolean;
+  completed: boolean;
+  completedWrong: boolean;
 }) => {
   return (
-    <Touchable pressed={pressed}>
+    <Touchable pressed={pressed} isDisabled={completed}>
       <PresenceTransition
         visible={true}
         initial={{ translateY: 300, opacity: 0, scale: 1 }}
@@ -47,9 +48,18 @@ const CarCard = ({
           },
         }}
       >
-        <View style={styles.card}>
+        <View
+          style={{
+            ...styles.card,
+            borderWidth: 2,
+            borderColor:
+              (isCorrect && "green") ||
+              (completedWrong && "red") ||
+              "transparent",
+          }}
+        >
           <Image
-            source={{uri: imageSrc}}
+            source={{ uri: imageSrc }}
             height={100}
             width={100}
             resizeMode="cover"
@@ -63,7 +73,13 @@ const CarCard = ({
             <Text
               size="md"
               center
-              style={{ ...styles.card__text, opacity: revealPrice ? 1 : 0, backgroundColor: "green", color: "#fff", padding: 5 }}
+              style={{
+                ...styles.card__text,
+                opacity: revealPrice || completed ? 1 : 0,
+                backgroundColor: completedWrong || !isCorrect ? "red" : "green",
+                color: "#fff",
+                padding: 5,
+              }}
             >
               ${price}
             </Text>
@@ -93,29 +109,66 @@ const GameScreen = (props: Props) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(1);
   const [showHint, setShowHint] = useState<boolean>(false);
   const [userAnswer, setUserAnswer] = useState<null | 1 | 2>(null);
-  
+  const [correctAnswer, setCorrectAnswer] = useState<null | 1 | 2>(null);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+
   const car1 = Cars[currentQuestion - 1];
   const car2 = Cars[currentQuestion];
 
-  const nextQuestion = ()=> {
-    setShowHint(false);
-    // setUserAnswer(null);
-    setCurrentQuestion(old => {
-      return Cars.length >= old + 2 ? old + 2: 1})
-  }
+  const toast = useToast();
+  const toastIdRef = useRef();
 
-  useEffect(()=> {
+  const nextQuestion = () => {
+    setShowHint(false);
+    setCorrectAnswer(null);
+    setCurrentQuestion((old) => {
+      return Cars.length >= old + 2 ? old + 2 : 1;
+    });
+  };
+
+  const gameOverHandler = () => {
+    toast.show({
+      title: "Game over: you got it wrong",
+      description: "The car has the lower price of the two",
+      duration: 3000,
+      onCloseComplete() {
+        console.log("game over!");
+      },
+      collapsable: true,
+      backgroundColor: "#ff0000",
+      placement: "bottom",
+      // tintColor: "white"
+    });
+    setGameOver(true);
+  };
+
+  useEffect(() => {
     if (firstLoad) {
       setFirstLoad(false);
       return;
-    };
-    // if (typeof(userAnswer) === "number") return;
+    }
+    if (!userAnswer) return;
+    const correctAnswr = car1.price > car2.price ? 1 : 2;
+    const isDraw = car1.price === car2.price;
+    const isCorrect = userAnswer === correctAnswr;
+    setCorrectAnswer(correctAnswr);
+    if (isCorrect || isDraw) {
+      setGameScore((old) => old + 1);
+    } else {
+      return gameOverHandler();
+    }
+    setTimeout(nextQuestion, 1000);
+  }, [userAnswer]);
 
-    let isCorrect = userAnswer === 1;
-    if (isCorrect) setGameScore(old => old + 1);
-    nextQuestion();
-  }, [userAnswer])
-  
+  useEffect(() => {
+    setUserAnswer(null);
+  }, [currentQuestion]);
+
+  useEffect(() => {
+    if (firstLoad) return;
+
+    setTimeout(() => props.navigation.navigate("GameOverview"), 2000);
+  }, [gameOver]);
 
   return (
     <View style={styles.container}>
@@ -140,7 +193,10 @@ const GameScreen = (props: Props) => {
         imageSrc={car1.imageUrl}
         price={car1.price}
         revealPrice={showHint}
-        pressed={()=> setUserAnswer(1)}
+        pressed={() => setUserAnswer(1)}
+        isCorrect={correctAnswer === 1}
+        completed={!!userAnswer}
+        completedWrong={userAnswer === 1 && userAnswer !== correctAnswer}
       />
 
       <View style={{ marginVertical: 10, alignItems: "center" }}>
@@ -155,16 +211,17 @@ const GameScreen = (props: Props) => {
         imageSrc={car2.imageUrl}
         price={car2.price}
         revealPrice={false}
-        pressed={()=> setUserAnswer(2)}
+        pressed={() => setUserAnswer(2)}
+        isCorrect={correctAnswer === 2}
+        completed={!!userAnswer}
+        completedWrong={userAnswer === 2 && userAnswer !== correctAnswer}
       />
 
       <View style={styles.hint}>
-        <Button onPress={() => setShowHintModal(true)} isDisabled={showHint}>
+        <Button onPress={() => setShowHintModal(true)} isDisabled={showHint || gameOver}>
           {"Hint :)"}
         </Button>
       </View>
-
-
 
       <AlertModal
         heading="Hint"
@@ -177,6 +234,8 @@ const GameScreen = (props: Props) => {
         }}
         successBtnLabel="Show hint"
       />
+
+      {/* {gameOver && <Toast} */}
     </View>
   );
 };
@@ -196,10 +255,7 @@ const styles = StyleSheet.create({
   },
   card: {
     // borderRadius: 1,
-    elevation: 1,
-    shadowColor: "black",
-    shadowOffset: { height: 1, width: 1 },
-    shadowOpacity: 0.2,
+    // elevation: 1,
   },
   card__image: {
     height: 150,

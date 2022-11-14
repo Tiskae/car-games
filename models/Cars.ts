@@ -15,6 +15,17 @@ interface Car {
 const Cars: Car[] = [
   {
     id: 1,
+    name: "Bugatti Chiron Sport",
+    price: 3500000,
+    horsePower: 1500,
+    topSpeed: 492,
+    nationality: "German",
+    imageUrl:
+      "https://cdn.motor1.com/images/mgl/QE3q0/s1/2021-bugatti-chiron-super-sport-300.jpg",
+    imageAuthor: "",
+  },
+  {
+    id: 2,
     name: "Chevrolet Camaro",
     price: 55000,
     horsePower: 450,
@@ -25,7 +36,7 @@ const Cars: Car[] = [
     imageAuthor: "",
   },
   {
-    id: 2,
+    id: 3,
     name: "Ford Mustang",
     price: 48000,
     horsePower: 417,
@@ -33,17 +44,6 @@ const Cars: Car[] = [
     nationality: "American",
     imageUrl:
       "https://pictures.topspeed.com/IMG/crop/202205/ford-mustang-gtt-by--1_800x0w.jpg",
-    imageAuthor: "",
-  },
-  {
-    id: 3,
-    name: "Bugatti Chiron Sport",
-    price: 3500000,
-    horsePower: 1500,
-    topSpeed: 492,
-    nationality: "German",
-    imageUrl:
-      "https://cdn.motor1.com/images/mgl/QE3q0/s1/2021-bugatti-chiron-super-sport-300.jpg",
     imageAuthor: "",
   },
   {
