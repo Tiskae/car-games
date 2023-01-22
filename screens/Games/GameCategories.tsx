@@ -1,14 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { FunctionComponentElement, useEffect, useState } from "react";
 import { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store";
-import { StyleSheet, ScrollView } from "react-native";
+import {
+  MaterialIcons,
+  Fontisto,
+  Ionicons,
+  FontAwesome,
+  AntDesign,
+} from "@expo/vector-icons";
+import { StyleSheet, ScrollView , Text} from "react-native";
 import GameBox from "../../components/GameBox";
-import { increaseProgress } from "../../store/slices/games";
+import GamesStore from "../../mobx/gamesStore";
+import { observer } from "mobx-react-lite";
+import { toJS } from "mobx";
 
 const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
-  const dispatch = useDispatch();
   const [focus, setFocus] = useState(false);
+
+  const allGames = toJS(GamesStore.games);
 
   useEffect(() => setFocus(true), []);
 
@@ -32,10 +40,11 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
     props.navigation.navigate("GameDetails", { id, title });
   };
 
-  const allGames = useSelector((state: RootState) => state.games);
-  const increaseProgessHandler = () => {
-    dispatch(increaseProgress({ id: "1", value: 4 }));
-  };
+  // const allGames = useSelector((state: RootState) => state.games);
+  // const increaseProgessHandler = () => {
+  //   dispatch(increaseProgress({ id: "1", value: 4 }));
+  // };
+
 
   return (
     <ScrollView style={styles.container} scrollEnabled={true}>
@@ -43,19 +52,25 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
         Increase Price Quiz Progress
       </Button> */}
 
-      {allGames.games.map((game, idx, arr) => {
-        const IconPack = game.IconPack;
+
+      {allGames.map((game, idx, arr) => {
+        console.log(game);
+        const iconPack = game.icon.pack;
+
+        let IconPack: any;
+        if (iconPack === "antDesign") IconPack = AntDesign;
+        if(iconPack === "fontawesome")  IconPack = FontAwesome;
+        if(iconPack === "fontisto")  IconPack = Fontisto;
+        if(iconPack === "ionicons")  IconPack = Ionicons;
+        if(iconPack === "materialIcons" ) IconPack = MaterialIcons;
+
         return (
           <GameBox
             key={game.id}
             id={idx}
             title={game.title}
             backgroundColor={game.backgColor}
-            icon={
-              IconPack && (
-                <IconPack name={game.iconName} size={50} color="#222" />
-              )
-            }
+            Icon={<IconPack name={game.icon.name} size={50} color="#222" />}
             clicked={() => navigateToGame(game.id, game.title)}
             locked={game.locked}
             progress={game.progress}
@@ -73,7 +88,7 @@ const GameCategories = (props: MaterialBottomTabScreenProps<any>) => {
 
 // } ;
 
-export default GameCategories;
+export default observer(GameCategories);
 
 const styles = StyleSheet.create({
   container: {

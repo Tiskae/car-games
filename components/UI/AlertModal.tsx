@@ -1,5 +1,14 @@
 import React, {useRef} from "react";
-import {AlertDialog, Button} from "native-base"
+import {AlertDialog, Button} from "native-base";
+
+type ModalProps = {
+  heading: string;
+  body: string;
+  onClose: Function;
+  onSuccess: Function;
+  successBtnLabel?: string;
+  show: boolean;
+};
 
 const Modal = ({
   heading,
@@ -8,14 +17,7 @@ const Modal = ({
   onSuccess,
   successBtnLabel,
   show,
-}: {
-  heading: string;
-  body: string;
-  onClose: Function;
-  onSuccess: Function;
-  successBtnLabel?: string;
-  show: boolean;
-}) => {
+}: ModalProps) => {
   const cancelRef = useRef(null);
 
   return (

@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { View, Animated } from "react-native";
 
-const AnimatedView = (props: { children: any; style?: object }) => {
+type AnimatedViewProps = {
+  children: any;
+  style?: object;
+};
+
+const AnimatedView = (props: AnimatedViewProps) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {

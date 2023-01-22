@@ -10,11 +10,11 @@ import { PresenceTransition } from "native-base";
 
 import AnimatedView from "./UI/AnimatedView";
 
-interface Props {
+interface GameBoxProps {
   id: number;
   title: string;
   backgroundColor?: string;
-  icon?: React.FunctionComponentElement<any>;
+  Icon: React.FunctionComponentElement<any>;
   locked?: boolean;
   clicked: (event: GestureResponderEvent) => void;
   progress?: number;
@@ -23,10 +23,21 @@ interface Props {
   focus: boolean;
 }
 
-const GameBox = (props: Props) => {
+const GameBox = ({
+  id,
+  title,
+  backgroundColor,
+  Icon,
+  locked,
+  clicked,
+  progress,
+  highScore,
+  isLast,
+  focus,
+}: GameBoxProps) => {
   return (
     <PresenceTransition
-      visible={props.focus}
+      visible={focus}
       initial={{ translateX: 300, opacity: 0, scale: 1 }}
       animate={{
         translateX: 0,
@@ -34,7 +45,7 @@ const GameBox = (props: Props) => {
         scale: 1,
         transition: {
           duration: 1,
-          delay: +props.id * 65,
+          delay: +id * 65,
           type: "spring",
           velocity: 20,
           friction: 10,
@@ -42,45 +53,43 @@ const GameBox = (props: Props) => {
         },
       }}
     >
-      <Touchable pressed={props.clicked} isDisabled={props.locked || false}>
+      <Touchable pressed={clicked} isDisabled={locked || false}>
         <View
           style={{
             ...styles.container,
-            backgroundColor: props.backgroundColor || colors.redLight,
-            opacity: props.locked ? 0.2 : 1,
-            marginBottom: props.isLast ? 30 : 10,
+            backgroundColor: backgroundColor || colors.redLight,
+            opacity: locked ? 0.2 : 1,
+            marginBottom: isLast ? 30 : 10,
           }}
         >
           <View style={styles.details}>
             <View style={{ alignSelf: "flex-start" }}>
               <Text size="md" upper>
-                {props.title}
+                {title}
               </Text>
             </View>
             <View>
-              {props.icon || (
-                <AntDesign name="question" size={50} color="black" />
-              )}
+              {Icon}
             </View>
           </View>
-          {!props.locked && props.progress && (
+          {!locked && progress && (
             <View style={styles.progress}>
               <Progress
                 backgroundColor={"#fff"}
                 colorScheme={"gray"}
-                value={props.progress}
+                value={progress}
                 size="sm"
                 borderRadius={7}
               />
             </View>
           )}
-          {!props.locked && props.highScore && (
+          {!locked && highScore && (
             <View style={styles.highScore}>
-              <Text size="sm">HighScore: {props.highScore}</Text>
+              <Text size="sm">HighScore: {highScore}</Text>
               <View style={styles.deco}></View>
             </View>
           )}
-          {props.locked && (
+          {locked && (
             <View style={styles.locked}>
               <Fontisto name="locked" size={20} color="black" />
             </View>

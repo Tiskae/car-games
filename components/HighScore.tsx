@@ -1,15 +1,17 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const HighScore = (props: { value: string; align?: "left" | "right" }) => {
+type HighScoreProps = { value: string; align?: "left" | "right" };
+
+const HighScore = ({value, align}: HighScoreProps) => {
   return (
     <View
       style={{
         ...styles.container,
-        alignItems: props.align === "left" ? "flex-end" : "flex-start",
+        alignItems: align === "left" ? "flex-end" : "flex-start",
       }}
     >
-      <Text style={styles.text}>High score: {props.value}</Text>
+      <Text style={styles.text}>High score: {value}</Text>
     </View>
   );
 };

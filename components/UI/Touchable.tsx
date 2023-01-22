@@ -11,20 +11,20 @@ import {
 
 type GestureEvent = (event: GestureResponderEvent) => void;
 
-interface Props {
+type TouchableProps  = {
   children: any;
   pressed: GestureEvent | Function;
   isDisabled?: boolean;
 }
 
-export default (props: Props) => {
+export default ({isDisabled, pressed, children}: TouchableProps) => {
   if (Platform.OS === "android" && Platform.Version >= 22) {
     return (
       <TouchableNativeFeedback
-        disabled={props.isDisabled}
-        onPress={props.pressed as GestureEvent}
+        disabled={isDisabled}
+        onPress={pressed as GestureEvent}
       >
-        {props.children}
+        {children}
       </TouchableNativeFeedback>
     );
   }
@@ -32,10 +32,10 @@ export default (props: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      disabled={props.isDisabled}
-      onPress={props.pressed as GestureEvent}
+      disabled={isDisabled}
+      onPress={pressed as GestureEvent}
     >
-      {props.children}
+      {children}
     </TouchableOpacity>
   );
 };

@@ -17,7 +17,7 @@ const GameScreen = (props: Props) => {
     >
       <GameLayout
         title="Price quiz"
-        subtitle="Choose the car woth the higher price. Game ends when
+        subtitle="Choose the car with the higher price. Game ends when
                 you lose your streak."
         highScoreVal="20"
       >

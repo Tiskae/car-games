@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { Fontisto, SimpleLineIcons } from "@expo/vector-icons";
 import Touchable from "./UI/Touchable";
 
-import { RootState } from "../store/index";
 
-interface Props {
+type HeaderProps = {
   navigateToSettings: Function;
 }
 
-const Header = (props: Props) => {
+const Header = (props: HeaderProps) => {
   const [statusBarHeight, setStatusBarHeight] = useState(0);
 
-  const totalPoints = useSelector(
-    (state: RootState) => state.games.totalPoints
-  );
+  // const totalPoints = useSelector(
+  //   (state: RootState) => state.games.totalPoints
+  // );
 
   useEffect(() => {
     const deviceStatusBarHeight = StatusBar.currentHeight as number;
@@ -26,7 +24,7 @@ const Header = (props: Props) => {
     <View style={{ ...styles.container, paddingTop: statusBarHeight }}>
       <View style={styles.points}>
         <SimpleLineIcons name="trophy" color={"#222"} size={18} />
-        <Text style={styles.pointText}>{totalPoints} points</Text>
+        <Text style={styles.pointText}>{50} points</Text>
       </View>
       <Touchable pressed={props.navigateToSettings}>
         <View
