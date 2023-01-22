@@ -14,7 +14,7 @@ interface GameBoxProps {
   id: number;
   title: string;
   backgroundColor?: string;
-  icon?: React.FunctionComponentElement<any>;
+  Icon: React.FunctionComponentElement<any>;
   locked?: boolean;
   clicked: (event: GestureResponderEvent) => void;
   progress?: number;
@@ -27,7 +27,7 @@ const GameBox = ({
   id,
   title,
   backgroundColor,
-  icon,
+  Icon,
   locked,
   clicked,
   progress,
@@ -69,9 +69,7 @@ const GameBox = ({
               </Text>
             </View>
             <View>
-              {icon || (
-                <AntDesign name="question" size={50} color="black" />
-              )}
+              {Icon}
             </View>
           </View>
           {!locked && progress && (

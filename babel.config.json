@@ -1,0 +1,5 @@
+{
+  "presets": ["babel-preset-expo"],
+  // Babel < 7.13.0
+  "plugins": [["@babel/plugin-proposal-class-properties", { "loose": false }]]
+}

@@ -14,7 +14,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Auth"
+        initialRouteName="AUTH_SCREEN"
         screenOptions={{
           // headerStyle: {
           //   backgroundColor: "#fff",
@@ -26,7 +26,7 @@ const RootNavigator = () => {
         }}
       >
         <Stack.Screen
-          name="Auth"
+          name="AUTH_SCREEN"
           component={AuthScreen}
           options={{
             title: "Sign up",
@@ -38,7 +38,7 @@ const RootNavigator = () => {
           }}
         />
         <Stack.Screen
-          name="App"
+          name="APP"
           component={GameNavigator}
           options={{
             headerShown: true,

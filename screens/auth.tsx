@@ -109,39 +109,39 @@ const AuthScreen = ({
               isLoading={isLoading}
               onPress={() => {
                 console.log(username, email, password);
-                setIsLoading(true);
-                fetch("https://33cf-102-89-45-161.eu.ngrok.io", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({ username, email, password }),
-                })
-                  .then((res) => {
-                    console.log("res mi okoko", res);
-                    return res.json();
-                  })
-                  .then((response) => {
-                    // if
-                    console.log("response mi okoko", response);
-                  })
-                  .catch((err) => {
-                    toast.show({
-                      title: `Error ${err.statusCode}`,
-                      description: err.message,
-                      duration: 2000,
-                      // onCloseComplete() {
-                      //   console.log("game over!");
-                      // },
-                      // collapsable: true,
-                      backgroundColor: "#ff0000",
-                      placement: "bottom",
-                      // tintColor: "white"
-                    });
-                    console.error("catch error", err);
-                  })
-                  .finally(() => setIsLoading(false));
-                navigation.navigate("App")
+                // setIsLoading(true);
+                // fetch("https://33cf-102-89-45-161.eu.ngrok.io", {
+                //   method: "POST",
+                //   headers: {
+                //     "Content-Type": "application/json",
+                //   },
+                //   body: JSON.stringify({ username, email, password }),
+                // })
+                //   .then((res) => {
+                //     console.log("res mi okoko", res);
+                //     return res.json();
+                //   })
+                //   .then((response) => {
+                //     // if
+                //     console.log("response mi okoko", response);
+                //   })
+                //   .catch((err) => {
+                //     toast.show({
+                //       title: `Error ${err.statusCode}`,
+                //       description: err.message,
+                //       duration: 2000,
+                //       // onCloseComplete() {
+                //       //   console.log("game over!");
+                //       // },
+                //       // collapsable: true,
+                //       backgroundColor: "#ff0000",
+                //       placement: "bottom",
+                //       // tintColor: "white"
+                //     });
+                //     console.error("catch error", err);
+                //   })
+                //   .finally(() => setIsLoading(false));
+                navigation.navigate("APP")
               }}
             >
               {authType === "login" ? "Login" : "Sign up"}

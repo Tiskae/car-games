@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { Ionicons, Fontisto } from "@expo/vector-icons";
 import LeaderboardScreen from "../screens/Leaderboard/Leaderboard";
@@ -7,12 +6,13 @@ import StoreScreen from "../screens/Store/Store";
 import GameNavigator from "./GameNavigator";
 import GameCategories from "../screens/Games/GameCategories";
 
-import { RootState } from "../store/index";
+// import { RootState } from "../store/index";
 
 const Tab = createMaterialBottomTabNavigator();
 
 const AppNavigator = () => {
-  const showTabBar = useSelector((state: RootState) => state.games.showTabBar);
+  // const showTabBar = useSelector((state: RootState) => state.games.showTabBar);
+  const showTabBar = true;
 
   return (
     <Tab.Navigator

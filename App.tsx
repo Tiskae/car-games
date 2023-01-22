@@ -4,17 +4,21 @@ import { SafeAreaView } from "react-native";
 import { NativeBaseProvider } from "native-base";
 import RootNavigator from "./navigation";
 
-import { store } from "./store";
-import { Provider } from "react-redux";
+
+// Babel check for mobx - https://mobx.js.org/installation.html
+if (
+  !new (class {
+    x: any;
+  })().hasOwnProperty("x")
+)
+  throw new Error("Transpiler is not configured correctly");
 
 export default () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Provider store={store}>
+    // <SafeAreaView style={{ flex: 1 }}>
         <NativeBaseProvider>
           <RootNavigator />
         </NativeBaseProvider>
-      </Provider>
-    </SafeAreaView>
+    // </SafeAreaView>
   );
 };

@@ -6,7 +6,7 @@ import { ThemeComponentSizeType, ColorSchemeType } from "native-base/lib/typescr
 type ButtonProps = {
   children: string;
   onPress: Function;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   size?: ThemeComponentSizeType<"Button">;
   variant?: "ghost" | "outline" | "solid" | "subtle" | "link" | "unstyled";
   colorScheme?: ColorSchemeType;

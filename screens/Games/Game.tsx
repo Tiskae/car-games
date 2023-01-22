@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { getGame } from "../../helpers";
-import { toggleTabBar } from "../../store/slices/games";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { observer } from "mobx-react-lite";
+import AppStore from "../../mobx/appStore";
 
 interface Props {
   navigation: {};
@@ -22,11 +22,10 @@ const GameDetails = (props: Props) => {
   const { id, title } = props.route.params;
   const { game: Game, overview: GameOverview } = getGame(id);
 
-  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(toggleTabBar());
-  // }, []);
+    useEffect(() => {
+      console.log(AppStore);
+  }, []);
 
   return (
     // <View style={styles.container}>
@@ -44,7 +43,7 @@ const GameDetails = (props: Props) => {
   );
 };
 
-export default GameDetails;
+export default observer(GameDetails);
 
 const styles = StyleSheet.create({
   container: {
