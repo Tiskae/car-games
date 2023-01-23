@@ -15,10 +15,10 @@ if (
 
 export default () => {
   return (
-    // <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 }}>
         <NativeBaseProvider>
           <RootNavigator />
         </NativeBaseProvider>
-    // </SafeAreaView>
+    </SafeAreaView>
   );
 };
