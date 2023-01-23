@@ -2,11 +2,10 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import AuthScreen from "../screens/Auth";
-// import AppNavigator from "./AppNavigator";
 import GameNavigator from "./GameNavigator";
 import SettingsScreen from "../screens/Settings";
 import Header from "../components/Header";
+import AuthNavigator from "./AuthNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,7 +13,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="AUTH_SCREEN"
+        initialRouteName="AUTH"
         screenOptions={{
           // headerStyle: {
           //   backgroundColor: "#fff",
@@ -26,8 +25,8 @@ const RootNavigator = () => {
         }}
       >
         <Stack.Screen
-          name="AUTH_SCREEN"
-          component={AuthScreen}
+          name="AUTH"
+          component={AuthNavigator}
           options={{
             title: "Sign up",
             // headerStyle: {
@@ -59,7 +58,7 @@ const RootNavigator = () => {
           }}
         />
         <Stack.Screen
-          name="Settings"
+          name="SETTINGS"
           component={SettingsScreen}
           options={{ headerShown: true }}
         />
