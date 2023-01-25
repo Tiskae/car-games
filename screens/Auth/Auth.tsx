@@ -42,6 +42,7 @@ const AuthScreen = ({
   >("register"); // register | login
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -91,6 +92,21 @@ const AuthScreen = ({
               />
             </View>
           )}
+
+          {authType === "register" && (
+            <View style={styles.inputBox}>
+              <FormInput
+                label="Country"
+                type="text"
+                warningMsg="Invalid country "
+                keyboardType="default"
+                returnKeyType="next"
+                value={email}
+                onChange={(newVal: string) => setCountry(newVal)}
+              />
+            </View>
+          )}
+
           <View style={styles.inputBox}>
             <FormInput
               label="Password"
@@ -111,17 +127,34 @@ const AuthScreen = ({
                 // setIsLoading(true);
 
                 let apiUrl = BASE_API_URL;
-                const payload: {
+
+                interface LoginPayload {
                   username: string;
-                  email?: string;
                   password: string;
-                } = { username, password };
+                  email?: string;
+                  country?: string;
+                }
+
+                interface RegisterPayload {
+                  username: string;
+                  password: string;
+                  email: string;
+                  country: string;
+                }
+
+                type PayloadType = LoginPayload | RegisterPayload;
+
+                const payload: PayloadType = {
+                  username,
+                  password,
+                };
 
                 if (authType === "login") {
                   apiUrl += "/login";
                 } else if (authType === "register") {
                   apiUrl += "/register";
                   payload.email = email;
+                  payload.country = country;
                 }
 
                 fetch(apiUrl, {
